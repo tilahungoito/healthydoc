@@ -1,0 +1,252 @@
+{
+  "symptoms": [
+    {
+      "name": "fever",
+      "category": "general",
+      "severity_levels": ["mild", "moderate", "high"],
+      "description": "Elevated body temperature above normal range"
+    },
+    {
+      "name": "headache",
+      "category": "neurological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Pain or discomfort in the head or neck area"
+    },
+    {
+      "name": "cough",
+      "category": "respiratory",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Reflex action to clear the throat and breathing passages"
+    },
+    {
+      "name": "fatigue",
+      "category": "general",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Extreme tiredness or lack of energy"
+    },
+    {
+      "name": "nausea",
+      "category": "digestive",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Feeling of sickness with an inclination to vomit"
+    },
+    {
+      "name": "chest_pain",
+      "category": "cardiovascular",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Pain or discomfort in the chest area"
+    },
+    {
+      "name": "shortness_of_breath",
+      "category": "respiratory",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Difficulty breathing or feeling breathless"
+    },
+    {
+      "name": "abdominal_pain",
+      "category": "digestive",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Pain or discomfort in the abdominal area"
+    },
+    {
+      "name": "dizziness",
+      "category": "neurological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Feeling of lightheadedness or unsteadiness"
+    },
+    {
+      "name": "joint_pain",
+      "category": "musculoskeletal",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Pain or discomfort in joints"
+    },
+    {
+      "name": "back_pain",
+      "category": "musculoskeletal",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Pain or discomfort in the back area"
+    },
+    {
+      "name": "muscle_pain",
+      "category": "musculoskeletal",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Pain or discomfort in muscles"
+    },
+    {
+      "name": "sore_throat",
+      "category": "respiratory",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Pain or irritation in the throat"
+    },
+    {
+      "name": "runny_nose",
+      "category": "respiratory",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Excessive nasal discharge"
+    },
+    {
+      "name": "congestion",
+      "category": "respiratory",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Blocked or stuffy nose"
+    },
+    {
+      "name": "sneezing",
+      "category": "respiratory",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Involuntary expulsion of air from the nose and mouth"
+    },
+    {
+      "name": "rash",
+      "category": "dermatological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Area of irritated or swollen skin"
+    },
+    {
+      "name": "itching",
+      "category": "dermatological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Uncomfortable sensation that causes the desire to scratch"
+    },
+    {
+      "name": "swelling",
+      "category": "general",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Abnormal enlargement of a body part"
+    },
+    {
+      "name": "weight_loss",
+      "category": "general",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Unintentional reduction in body weight"
+    },
+    {
+      "name": "weight_gain",
+      "category": "general",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Increase in body weight"
+    },
+    {
+      "name": "insomnia",
+      "category": "neurological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Difficulty falling asleep or staying asleep"
+    },
+    {
+      "name": "anxiety",
+      "category": "psychological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Feeling of worry, nervousness, or unease"
+    },
+    {
+      "name": "depression",
+      "category": "psychological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Persistent feeling of sadness and loss of interest"
+    },
+    {
+      "name": "memory_loss",
+      "category": "neurological",
+      "severity_levels": ["mild", "moderate", "severe"],
+      "description": "Difficulty remembering information or events"
+    }
+  ],
+  "conditions": [
+    {
+      "name": "common_cold",
+      "symptoms": ["cough", "sore_throat", "runny_nose", "congestion", "sneezing"],
+      "severity": "low",
+      "description": "Viral infection of the upper respiratory tract"
+    },
+    {
+      "name": "flu",
+      "symptoms": ["fever", "headache", "fatigue", "cough", "muscle_pain"],
+      "severity": "medium",
+      "description": "Influenza viral infection"
+    },
+    {
+      "name": "migraine",
+      "symptoms": ["headache", "nausea", "dizziness"],
+      "severity": "medium",
+      "description": "Severe headache often accompanied by nausea and sensitivity to light"
+    },
+    {
+      "name": "anxiety_disorder",
+      "symptoms": ["anxiety", "chest_pain", "shortness_of_breath", "dizziness"],
+      "severity": "medium",
+      "description": "Mental health condition characterized by excessive worry and fear"
+    },
+    {
+      "name": "gastroenteritis",
+      "symptoms": ["nausea", "abdominal_pain", "fatigue"],
+      "severity": "medium",
+      "description": "Inflammation of the stomach and intestines"
+    },
+    {
+      "name": "allergic_reaction",
+      "symptoms": ["rash", "itching", "swelling", "sneezing"],
+      "severity": "medium",
+      "description": "Immune system response to a foreign substance"
+    },
+    {
+      "name": "depression",
+      "symptoms": ["depression", "fatigue", "insomnia", "weight_loss"],
+      "severity": "high",
+      "description": "Mental health condition characterized by persistent sadness"
+    },
+    {
+      "name": "hypertension",
+      "symptoms": ["headache", "dizziness", "chest_pain"],
+      "severity": "high",
+      "description": "High blood pressure condition"
+    },
+    {
+      "name": "diabetes",
+      "symptoms": ["fatigue", "weight_loss", "frequent_urination"],
+      "severity": "high",
+      "description": "Metabolic disorder affecting blood sugar levels"
+    },
+    {
+      "name": "arthritis",
+      "symptoms": ["joint_pain", "swelling", "muscle_pain"],
+      "severity": "medium",
+      "description": "Inflammation of joints causing pain and stiffness"
+    }
+  ],
+  "urgency_indicators": {
+    "high": [
+      "chest_pain",
+      "shortness_of_breath",
+      "severe_headache",
+      "high_fever",
+      "severe_abdominal_pain",
+      "loss_of_consciousness"
+    ],
+    "medium": [
+      "moderate_pain",
+      "persistent_cough",
+      "fatigue",
+      "nausea",
+      "dizziness",
+      "rash"
+    ],
+    "low": [
+      "mild_symptoms",
+      "general_malaise",
+      "minor_aches",
+      "runny_nose",
+      "mild_cough"
+    ]
+  },
+  "categories": {
+    "general": "General symptoms affecting overall health",
+    "neurological": "Symptoms related to the nervous system",
+    "respiratory": "Symptoms related to breathing and lungs",
+    "cardiovascular": "Symptoms related to heart and blood vessels",
+    "digestive": "Symptoms related to the digestive system",
+    "musculoskeletal": "Symptoms related to muscles and bones",
+    "dermatological": "Symptoms related to skin",
+    "psychological": "Symptoms related to mental health"
+  }
+}
+

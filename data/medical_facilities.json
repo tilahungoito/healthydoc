@@ -1,0 +1,120 @@
+{
+  "facility_types": [
+    {
+      "name": "hospital",
+      "description": "Large medical facility providing comprehensive healthcare services",
+      "services": ["emergency_care", "surgery", "diagnostics", "specialized_treatment"],
+      "urgency_levels": ["emergency", "urgent", "routine"]
+    },
+    {
+      "name": "clinic",
+      "description": "Smaller medical facility providing outpatient care",
+      "services": ["primary_care", "diagnostics", "preventive_care", "minor_treatment"],
+      "urgency_levels": ["urgent", "routine"]
+    },
+    {
+      "name": "pharmacy",
+      "description": "Facility providing prescription and over-the-counter medications",
+      "services": ["medication_dispensing", "health_consultation", "medical_supplies"],
+      "urgency_levels": ["routine"]
+    },
+    {
+      "name": "emergency_room",
+      "description": "Hospital department providing immediate medical care",
+      "services": ["emergency_care", "trauma_treatment", "critical_care"],
+      "urgency_levels": ["emergency"]
+    },
+    {
+      "name": "urgent_care",
+      "description": "Walk-in clinic for non-emergency urgent medical needs",
+      "services": ["urgent_care", "minor_injuries", "illness_treatment"],
+      "urgency_levels": ["urgent", "routine"]
+    },
+    {
+      "name": "specialist",
+      "description": "Medical professional specializing in specific areas of medicine",
+      "services": ["specialized_treatment", "consultation", "diagnosis"],
+      "urgency_levels": ["urgent", "routine"]
+    }
+  ],
+  "specialties": [
+    {
+      "name": "cardiology",
+      "description": "Heart and cardiovascular system",
+      "common_conditions": ["hypertension", "heart_disease", "arrhythmia"]
+    },
+    {
+      "name": "dermatology",
+      "description": "Skin, hair, and nail conditions",
+      "common_conditions": ["acne", "eczema", "skin_cancer", "psoriasis"]
+    },
+    {
+      "name": "neurology",
+      "description": "Nervous system disorders",
+      "common_conditions": ["migraine", "epilepsy", "parkinson", "stroke"]
+    },
+    {
+      "name": "orthopedics",
+      "description": "Musculoskeletal system",
+      "common_conditions": ["arthritis", "fractures", "sports_injuries", "back_pain"]
+    },
+    {
+      "name": "pediatrics",
+      "description": "Medical care for children",
+      "common_conditions": ["childhood_illnesses", "developmental_issues", "vaccinations"]
+    },
+    {
+      "name": "psychiatry",
+      "description": "Mental health conditions",
+      "common_conditions": ["depression", "anxiety", "bipolar", "schizophrenia"]
+    },
+    {
+      "name": "gastroenterology",
+      "description": "Digestive system disorders",
+      "common_conditions": ["ibs", "crohn", "ulcer", "liver_disease"]
+    },
+    {
+      "name": "endocrinology",
+      "description": "Hormone and metabolic disorders",
+      "common_conditions": ["diabetes", "thyroid", "obesity", "metabolic_syndrome"]
+    }
+  ],
+  "emergency_conditions": [
+    {
+      "condition": "heart_attack",
+      "symptoms": ["chest_pain", "shortness_of_breath", "nausea", "sweating"],
+      "urgency": "emergency",
+      "action": "Call emergency services immediately"
+    },
+    {
+      "condition": "stroke",
+      "symptoms": ["sudden_weakness", "speech_difficulty", "vision_problems", "severe_headache"],
+      "urgency": "emergency",
+      "action": "Call emergency services immediately"
+    },
+    {
+      "condition": "severe_allergic_reaction",
+      "symptoms": ["swelling", "difficulty_breathing", "rash", "dizziness"],
+      "urgency": "emergency",
+      "action": "Call emergency services immediately"
+    },
+    {
+      "condition": "severe_injury",
+      "symptoms": ["uncontrolled_bleeding", "broken_bones", "head_injury", "loss_of_consciousness"],
+      "urgency": "emergency",
+      "action": "Call emergency services immediately"
+    }
+  ],
+  "search_radius": {
+    "emergency": 10000,
+    "urgent": 5000,
+    "routine": 3000
+  },
+  "operating_hours": {
+    "emergency": "24/7",
+    "urgent_care": "Extended hours",
+    "clinic": "Business hours",
+    "pharmacy": "Extended hours"
+  }
+}
+
