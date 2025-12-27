@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { languageManager } from '@/lib/language/manager';
 import { HealthAnalysis, UserProfile } from '@/types';
-import { AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { AlertCircle, CheckCircle2, AlertTriangle, Play, Square } from 'lucide-react';
 import VoiceInput from '@/components/voice/VoiceInput';
 
 export default function HealthAnalysisPage() {
@@ -15,10 +15,27 @@ export default function HealthAnalysisPage() {
   const [analysis, setAnalysis] = useState<HealthAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isActive, setIsActive] = useState(false);
+
+  const handleStart = () => {
+    setIsActive(true);
+    setAnalysis(null);
+    setError(null);
+  };
+
+  const handleStop = () => {
+    setIsActive(false);
+    setLoading(false);
+  };
 
   const handleAnalyze = async () => {
     if (!userInput.trim()) {
       setError(t('please_describe_symptoms'));
+      return;
+    }
+
+    if (!isActive) {
+      setError('Please start the AI analysis first');
       return;
     }
 
@@ -219,13 +236,35 @@ export default function HealthAnalysisPage() {
           </div>
         </div>
 
-        <button
-          onClick={handleAnalyze}
-          disabled={loading}
-          className="mt-6 w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
-        >
-          {loading ? t('analyzing') : t('analyze_button')}
-        </button>
+        {/* Start/Stop Controls */}
+        <div className="mt-6 flex gap-3">
+          {!isActive ? (
+            <button
+              onClick={handleStart}
+              className="flex-1 flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-sm"
+            >
+              <Play className="w-5 h-5" />
+              Start AI Analysis
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={handleStop}
+                className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors shadow-sm"
+              >
+                <Square className="w-5 h-5" />
+                Stop
+              </button>
+              <button
+                onClick={handleAnalyze}
+                disabled={loading}
+                className="flex-1 bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+              >
+                {loading ? t('analyzing') : t('analyze_button')}
+              </button>
+            </>
+          )}
+        </div>
 
         {error && (
           <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">

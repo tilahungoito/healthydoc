@@ -31,6 +31,17 @@ export const Config = {
   WHO_API_KEY: process.env.WHO_API_KEY || '',
   ICD10_API_KEY: process.env.ICD10_API_KEY || '',
   SNOMED_CT_API_KEY: process.env.SNOMED_CT_API_KEY || '',
+
+  // Translation Providers
+  I18NOW_API_KEY: process.env.I18NOW_API_KEY || '',
+  I18NOW_API_URL: process.env.I18NOW_API_URL || 'https://api.i18now.ai',
+  GOOGLE_TRANSLATE_API_KEY: process.env.GOOGLE_TRANSLATE_API_KEY || '',
+  AZURE_TRANSLATOR_KEY: process.env.AZURE_TRANSLATOR_KEY || '',
+  AZURE_TRANSLATOR_REGION: process.env.AZURE_TRANSLATOR_REGION || '',
+  AZURE_TRANSLATOR_ENDPOINT: process.env.AZURE_TRANSLATOR_ENDPOINT || '',
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID || '',
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY || '',
+  AWS_REGION: process.env.AWS_REGION || '',
   
   // Medical AI Configuration
   MEDICAL_AI_MODEL: process.env.MEDICAL_AI_MODEL || process.env.GROQ_MODEL || 'llama-3.1-8b-instant',
@@ -51,7 +62,7 @@ export const Config = {
   
   // UI Settings
   APP_TITLE: 'AI Health Assistant',
-  APP_ICON: '🎯',
+  APP_ICON: 'image.png',
   
   // Health Analysis Settings
   MAX_SYMPTOMS: 10,

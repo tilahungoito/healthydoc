@@ -7,28 +7,46 @@
 
 # testing
 /coverage
+*.test.js
+*.test.ts
+*.test.tsx
+*.spec.js
+*.spec.ts
 
 # next.js
 /.next/
 /out/
+.next/
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
 *.pem
+Thumbs.db
+*.swp
+*.swo
+*~
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # local env files
 .env*.local
 .env
-env.template
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 ENV_ANALYSIS.md
+# Note: env.template should be committed (it's a template without real keys)
+
 # vercel
 .vercel
 
@@ -36,4 +54,104 @@ ENV_ANALYSIS.md
 *.tsbuildinfo
 next-env.d.ts
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+/venv/
+/python-service/venv/
+python-service/venv/
+python-service/__pycache__/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
 
+# Machine Learning Models (large files - DO NOT COMMIT)
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.pb
+*.onnx
+*.tflite
+*.bin
+*.weights
+
+# Model directories (all binary model files)
+lib/model/*.h5
+lib/model/**/*.bin
+lib/model/**/*.json
+lib/model/tfjs-malar-model/
+lib/model/tfjspnumoniaDetectorModel/
+!lib/model/README.md
+!lib/model/**/README.md
+
+# Native binaries and DLLs
+*.dll
+*.dylib
+*.so
+*.node
+lib/generated/prisma/**/*.dll
+lib/generated/prisma/**/*.node
+
+# Prisma (generated files - should be regenerated)
+/lib/generated/prisma
+lib/generated/prisma/**/*
+!lib/generated/prisma/.gitkeep
+prisma/migrations/*.sql
+!prisma/migrations/migration_lock.toml
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+.cache/
+
+# Large data files
+*.csv
+*.tsv
+*.parquet
+data/*.json
+!data/medical_facilities.json
+!data/symptoms_db.json
+
+# Package manager lock files (optional - some teams commit these)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
