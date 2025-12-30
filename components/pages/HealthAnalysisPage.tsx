@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import { languageManager } from '@/lib/language/manager';
 import { HealthAnalysis, UserProfile } from '@/types';
-import { AlertCircle, CheckCircle2, AlertTriangle, Play, Square } from 'lucide-react';
+import { AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react';
 import VoiceInput from '@/components/voice/VoiceInput';
 
-export default function HealthAnalysisPage() {
+export default function HealthAnalysisPage()
+{
   const t = languageManager.getText.bind(languageManager);
   const [userInput, setUserInput] = useState('');
   const [age, setAge] = useState(30);
@@ -15,34 +16,20 @@ export default function HealthAnalysisPage() {
   const [analysis, setAnalysis] = useState<HealthAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isActive, setIsActive] = useState(false);
 
-  const handleStart = () => {
-    setIsActive(true);
-    setAnalysis(null);
-    setError(null);
-  };
-
-  const handleStop = () => {
-    setIsActive(false);
-    setLoading(false);
-  };
-
-  const handleAnalyze = async () => {
-    if (!userInput.trim()) {
+  const handleAnalyze = async () =>
+  {
+    if (!userInput.trim())
+    {
       setError(t('please_describe_symptoms'));
-      return;
-    }
-
-    if (!isActive) {
-      setError('Please start the AI analysis first');
       return;
     }
 
     setLoading(true);
     setError(null);
 
-    try {
+    try
+    {
       const additionalContext: UserProfile = {
         age,
         gender,
@@ -59,21 +46,26 @@ export default function HealthAnalysisPage() {
         }),
       });
 
-      if (!response.ok) {
+      if (!response.ok)
+      {
         throw new Error('Analysis failed');
       }
 
       const data = await response.json();
       setAnalysis(data);
-    } catch (err) {
+    } catch (err)
+    {
       setError(t('error') + ': ' + (err instanceof Error ? err.message : 'Unknown error'));
-    } finally {
+    } finally
+    {
       setLoading(false);
     }
   };
 
-  const getUrgencyColor = (urgency: string) => {
-    switch (urgency) {
+  const getUrgencyColor = (urgency: string) =>
+  {
+    switch (urgency)
+    {
       case 'high':
         return 'text-red-600 bg-red-50 border-red-200';
       case 'medium':
@@ -85,8 +77,10 @@ export default function HealthAnalysisPage() {
     }
   };
 
-  const getUrgencyIcon = (urgency: string) => {
-    switch (urgency) {
+  const getUrgencyIcon = (urgency: string) =>
+  {
+    switch (urgency)
+    {
       case 'high':
         return <AlertCircle className="w-5 h-5" />;
       case 'medium':
@@ -109,13 +103,16 @@ export default function HealthAnalysisPage() {
     { value: 'liver_disease', label: 'Liver Disease' },
   ];
 
-  const handleAddCondition = (condition: string) => {
-    if (condition && !conditions.includes(condition)) {
+  const handleAddCondition = (condition: string) =>
+  {
+    if (condition && !conditions.includes(condition))
+    {
       setConditions([...conditions, condition]);
     }
   };
 
-  const handleRemoveCondition = (conditionToRemove: string) => {
+  const handleRemoveCondition = (conditionToRemove: string) =>
+  {
     setConditions(conditions.filter(c => c !== conditionToRemove));
   };
 
@@ -134,7 +131,8 @@ export default function HealthAnalysisPage() {
                 {t('describe_symptoms')}
               </label>
               <VoiceInput
-                onTranscript={(text) => {
+                onTranscript={(text) =>
+                {
                   setUserInput((prev) => prev ? `${prev} ${text}` : text);
                   setError(null);
                 }}
@@ -148,7 +146,7 @@ export default function HealthAnalysisPage() {
               placeholder="Example: I have been experiencing headaches and fatigue for the past few days... (or use voice input)"
               className="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none bg-white"
             />
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-gray-900">
               💡 {t('voice_input_hint') || 'Click the microphone icon to describe your symptoms using voice'}
             </p>
           </div>
@@ -156,7 +154,7 @@ export default function HealthAnalysisPage() {
           {/* Patient Info Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-900 mb-2">
                 {t('age')}
               </label>
               <input
@@ -186,13 +184,15 @@ export default function HealthAnalysisPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-900 mb-2">
                 {t('existing_conditions')}
               </label>
               <select
                 value=""
-                onChange={(e) => {
-                  if (e.target.value) {
+                onChange={(e) =>
+                {
+                  if (e.target.value)
+                  {
                     handleAddCondition(e.target.value);
                     e.target.value = '';
                   }
@@ -206,11 +206,12 @@ export default function HealthAnalysisPage() {
                   </option>
                 ))}
               </select>
-              
+
               {/* Dismissible Tags */}
               {conditions.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {conditions.map((condition) => {
+                  {conditions.map((condition) =>
+                  {
                     const condLabel = availableConditions.find(c => c.value === condition)?.label || condition;
                     return (
                       <span
@@ -236,34 +237,15 @@ export default function HealthAnalysisPage() {
           </div>
         </div>
 
-        {/* Start/Stop Controls */}
-        <div className="mt-6 flex gap-3">
-          {!isActive ? (
-            <button
-              onClick={handleStart}
-              className="flex-1 flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-sm"
-            >
-              <Play className="w-5 h-5" />
-              Start AI Analysis
-            </button>
-          ) : (
-            <>
-              <button
-                onClick={handleStop}
-                className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors shadow-sm"
-              >
-                <Square className="w-5 h-5" />
-                Stop
-              </button>
-              <button
-                onClick={handleAnalyze}
-                disabled={loading}
-                className="flex-1 bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
-              >
-                {loading ? t('analyzing') : t('analyze_button')}
-              </button>
-            </>
-          )}
+        {/* Analyze Button */}
+        <div className="mt-6">
+          <button
+            onClick={handleAnalyze}
+            disabled={loading}
+            className="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+          >
+            {loading ? t('analyzing') : t('analyze_button')}
+          </button>
         </div>
 
         {error && (
@@ -294,7 +276,7 @@ export default function HealthAnalysisPage() {
 
             {analysis.possible_conditions && analysis.possible_conditions.length > 0 && (
               <div>
-                <h4 className="font-semibold text-gray-800 mb-3">
+                <h4 className="font-semibold text-gray-900 mb-3">
                   {t('possible_conditions')}
                 </h4>
                 <ul className="space-y-2">
@@ -305,7 +287,7 @@ export default function HealthAnalysisPage() {
                     >
                       {typeof condition === 'object' ? (
                         <div>
-                          <span className="font-medium">{condition.name}</span>
+                          <span className="font-medium text-gray-900">{condition.name}</span>
                           {condition.confidence && (
                             <span className="ml-2 text-sm text-gray-600">
                               (Confidence: {(condition.confidence * 100).toFixed(0)}%)
@@ -313,7 +295,7 @@ export default function HealthAnalysisPage() {
                           )}
                         </div>
                       ) : (
-                        <span>{condition}</span>
+                        <span className="text-gray-900">{condition}</span>
                       )}
                     </li>
                   ))}
@@ -323,7 +305,7 @@ export default function HealthAnalysisPage() {
 
             {analysis.recommended_actions && analysis.recommended_actions.length > 0 && (
               <div>
-                <h4 className="font-semibold text-gray-800 mb-3">
+                <h4 className="font-semibold text-gray-900 mb-3">
                   {t('recommended_actions')}
                 </h4>
                 <ul className="space-y-2">
@@ -353,7 +335,7 @@ export default function HealthAnalysisPage() {
                 <h4 className="font-semibold text-gray-800 mb-3">
                   Medical Context
                 </h4>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-900 leading-relaxed">
                   {analysis.medical_context}
                 </p>
               </div>

@@ -21,7 +21,6 @@ import {
   Activity,
 } from 'lucide-react';
 import ProfileMenu from './ProfileMenu';
-import Image from 'next/image';
 type Page = 'health' | 'health-history' | 'scanner' | 'facilities' | 'settings' | 'about' | 'malaria-model' | 'pneumonia-model' | 'ai-doctor';
 
 interface SidebarProps {
@@ -45,6 +44,7 @@ export default function Sidebar({
 }: SidebarProps) {
   const t = languageManager.getText.bind(languageManager);
   const [isModelsOpen, setIsModelsOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const models = [
     { id: 'malaria-model' as Page, label: 'Malaria Detection', icon: Brain },
@@ -120,7 +120,16 @@ export default function Sidebar({
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-xl font-bold text-indigo-600 flex items-center gap-2">
-            <Image src="/image.png" alt="TG" width={50} height={50} />
+            {!imageError && (
+              <img 
+                src="/image.png" 
+                alt="TG" 
+                width={50} 
+                height={50}
+                onError={() => setImageError(true)}
+                className="object-contain"
+              />
+            )}
             {t('app_title')}
           </h1>
           <div className="flex gap-1">
