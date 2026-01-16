@@ -6,9 +6,54 @@ from PIL import Image
 import io
 import base64
 import os
+from tensorflow import keras
+from tensorflow.keras import layers
 
 app = Flask(__name__)
 CORS(app)
+
+# Define custom LayerScale layer for ConvNeXt models
+# Simplified implementation that matches what the saved model expects
+class LayerScale(layers.Layer):
+    """
+    LayerScale layer as used in ConvNeXt models.
+    Scales input by a learnable parameter (gamma) per feature dimension.
+    """
+    def __init__(self, init_values=1e-6, projection_dim=None, **kwargs):
+        super().__init__(**kwargs)
+        self.init_values = float(init_values) if init_values is not None else 1e-6
+        self.projection_dim = projection_dim
+        
+    def build(self, input_shape):
+        # Determine gamma shape: use projection_dim if provided, else use input shape
+        if self.projection_dim is not None:
+            gamma_shape = (self.projection_dim,)
+        else:
+            gamma_shape = (input_shape[-1],)
+        
+        self.gamma = self.add_weight(
+            name='gamma',
+            shape=gamma_shape,
+            initializer=keras.initializers.Constant(self.init_values),
+            trainable=True,
+            dtype=self.dtype
+        )
+        super().build(input_shape)
+    
+    def call(self, inputs, **kwargs):
+        return inputs * self.gamma
+    
+    def get_config(self):
+        config = super().get_config()
+        config['init_values'] = self.init_values
+        if self.projection_dim is not None:
+            config['projection_dim'] = self.projection_dim
+        return config
+
+# Register custom objects for model loading
+custom_objects = {
+    'LayerScale': LayerScale
+}
 
 # Get the base directory (parent of python-service)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,7 +96,12 @@ try:
             pneumonia_h5_path = model_path
             print(f"Loading pneumonia model from {pneumonia_h5_path}...")
             try:
-                pneumonia_model = tf.keras.models.load_model(pneumonia_h5_path)
+                # Load model with custom objects to handle LayerScale layer
+                pneumonia_model = tf.keras.models.load_model(
+                    pneumonia_h5_path,
+                    custom_objects=custom_objects,
+                    compile=False
+                )
                 print("✓ Pneumonia model loaded successfully!")
                 pneumonia_model_loaded = True
                 break
@@ -99,7 +149,11 @@ try:
                 model.save(output_path)
                 
                 print("   ✓ Conversion successful! Loading converted model...")
-                pneumonia_model = tf.keras.models.load_model(output_path)
+                pneumonia_model = tf.keras.models.load_model(
+                    output_path,
+                    custom_objects=custom_objects,
+                    compile=False
+                )
                 print("✓ Pneumonia model loaded successfully after conversion!")
                 pneumonia_model_loaded = True
                 

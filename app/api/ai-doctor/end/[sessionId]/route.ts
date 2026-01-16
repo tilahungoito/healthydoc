@@ -4,7 +4,7 @@ import { clearContext } from '@/lib/ai-doctor/context';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { sessionId: string } }
+  { params }: { params: Promise<{ sessionId: string }> | { sessionId: string } }
 ) {
   try {
     // Verify authentication (supports both Better Auth and Firebase)
@@ -17,7 +17,8 @@ export async function POST(
       );
     }
 
-    const { sessionId } = params;
+    const resolvedParams = await Promise.resolve(params);
+    const { sessionId } = resolvedParams;
 
     // Clear conversation context and receipt
     clearContext(sessionId);

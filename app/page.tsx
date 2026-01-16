@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 const continueAsGuest = async () => {
   'use server';
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   cookieStore.set('onboarding_complete', 'true', {
     path: '/',
     maxAge: 60 * 60 * 24 * 30, // 30 days
@@ -26,8 +26,8 @@ interface WelcomePageProps {
   };
 }
 
-export default function WelcomePage({ searchParams }: WelcomePageProps) {
-  const cookieStore = cookies();
+export default async function WelcomePage({ searchParams }: WelcomePageProps) {
+  const cookieStore = await cookies();
   const hasSession = Boolean(cookieStore.get('better-auth.session_token'));
   const hasOnboarded = cookieStore.get('onboarding_complete')?.value === 'true';
   const keepSignedIn = cookieStore.get('keep_signed_in')?.value === 'true';

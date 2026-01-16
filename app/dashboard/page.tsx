@@ -2,8 +2,8 @@ import DashboardShell from '@/components/dashboard/DashboardShell';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export default function DashboardPage() {
-  const cookieStore = cookies();
+export default async function DashboardPage() {
+  const cookieStore = await cookies();
   const hasSession = Boolean(cookieStore.get('better-auth.session_token'));
   const hasOnboarded = cookieStore.get('onboarding_complete')?.value === 'true';
 

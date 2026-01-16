@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { languageManager } from '@/lib/language/manager';
 import {
   Home,
@@ -45,6 +45,12 @@ export default function Sidebar({
   const t = languageManager.getText.bind(languageManager);
   const [isModelsOpen, setIsModelsOpen] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch by only rendering translated text after mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const models = [
     { id: 'malaria-model' as Page, label: 'Malaria Detection', icon: Brain },
@@ -130,7 +136,7 @@ export default function Sidebar({
                 className="object-contain"
               />
             )}
-            {t('app_title')}
+            {mounted ? t('app_title') : 'AI Health Assistant'}
           </h1>
           <div className="flex gap-1">
             <button
@@ -149,7 +155,7 @@ export default function Sidebar({
             </button>
           </div>
         </div>
-        <p className="text-xs text-gray-600">{t('welcome_message')}</p>
+        <p className="text-xs text-gray-600">{mounted ? t('welcome_message') : 'Welcome to your AI-powered health assistant!'}</p>
         {guestMode && (
           <div className="mt-3 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-amber-900">
             <ShieldAlert className="w-4 h-4" />

@@ -248,11 +248,13 @@ Return ONLY the JSON object, no additional text before or after.`;
             : language === 'ti'
             ? 'ንቕኑዕ ምርመራ ጥዕና፣ እባክዎ ዝተመረመረ ባለሙያ ጥዕና ሓላፊ ርኣይ።'
             : 'Please see a qualified healthcare professional for proper diagnosis.',
-          recommendations: language === 'am'
-            ? 'እባክዎ ምልክቶችዎን በጥንቃቄ ይከታተሉ። ምልክቶች ከባድ ከሆኑ ወይም ካልተቋረጡ ወዲያውኑ የጤና እርዳታ ይፈልጉ።'
-            : language === 'ti'
-            ? 'እባክዎ ነዚ ምልክታት ብጥንቃቐ ርኣዩ። እንተ ከቢድ ወይ እንተ ዘይወጸኡ፣ ብኡሕ ንጥረ ጥዕና ምኽንያት ርኣይ።'
-            : 'Please monitor your symptoms closely. If symptoms worsen or persist, seek immediate medical attention.',
+          recommendations: [
+            language === 'am'
+              ? 'እባክዎ ምልክቶችዎን በጥንቃቄ ይከታተሉ። ምልክቶች ከባድ ከሆኑ ወይም ካልተቋረጡ ወዲያውኑ የጤና እርዳታ ይፈልጉ።'
+              : language === 'ti'
+              ? 'እባክዎ ነዚ ምልክታት ብጥንቃቐ ርኣዩ። እንተ ከቢድ ወይ እንተ ዘይወጸኡ፣ ብኡሕ ንጥረ ጥዕና ምኽንያት ርኣይ።'
+              : 'Please monitor your symptoms closely. If symptoms worsen or persist, seek immediate medical attention.',
+          ],
           prescriptions: [],
           urgency: 'medium',
           conversationHistory: context,
@@ -291,11 +293,19 @@ Return ONLY the JSON object, no additional text before or after.`;
       }
 
       // Store for subsequent access
-      storeReceipt(sessionId, receiptData);
-      console.log(`[AI Doctor Receipt] Receipt generated and stored for session ${sessionId}`);
+      if (receiptData) {
+        storeReceipt(sessionId, receiptData);
+        console.log(`[AI Doctor Receipt] Receipt generated and stored for session ${sessionId}`);
+      }
     }
 
     // Return processed medical summary (no raw conversation)
+    if (!receiptData) {
+      return NextResponse.json(
+        { error: 'Receipt not found' },
+        { status: 404 }
+      );
+    }
     const { conversationHistory, ...publicReceipt } = receiptData;
     console.log(`[AI Doctor Receipt] Returning receipt for session ${sessionId}`);
     return NextResponse.json(publicReceipt);
